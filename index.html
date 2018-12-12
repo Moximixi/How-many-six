@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>"6"的次数</title>
+    <style>
+        input{
+            width: 50px;
+        }
+    </style>
+</head>
+<body>
+    <p>请输入查询范围:</p>
+    <input type="text" id="start">
+    <span>-----</span>
+    <input type="text" id="end">
+    <p>请输入要查询的数字(0-10)</p>
+    <input type="text" id="number">
+    <br>
+    <button id="query">查询</button>
+    <p id="title"></p>
+    <p id="answer"></p>
+
+    <script>
+        var start=document.querySelector("#start");
+        var end=document.querySelector("#end");
+        var answer=document.querySelector("#answer");
+        var query=document.querySelector("#query");
+        var title=document.querySelector("#title");
+        var number=document.querySelector("#number");
+        var searchNum;//要寻找的字符
+        var begin;//开始的数字
+        var stop;//结束的数字
+
+        /*
+        * 检查输入的数据
+        * */
+        function checkInput(){
+            if(begin>stop){
+                return false;
+            }else if(parseInt(searchNum)<0||parseInt(searchNum)>10){
+                return false;
+            }else{
+                return true;
+            }
+        }
+        /*
+        * 点击事件
+        * */
+        query.onclick=function(){
+            var time=0;//出现的次数
+            var arr=[];
+            searchNum=number.value;
+            begin=parseInt(start.value);
+            stop=parseInt(end.value);
+            if(checkInput()){
+                for(var i=begin;i<=stop;i++){
+                    for(var j=0;j<i.toString().length;j++){
+                        if(i.toString()[j]===searchNum){
+                            time++;
+                            arr.push(i);
+                        }
+                    }
+                }
+                title.innerText=start.value+"到"+end.value+"中字符"+searchNum+"出现的次数为:";
+                answer.innerText=time;
+                console.log(arr);
+            }else{
+                alert("请检查你的数据");
+            }
+        };
+    </script>
+</body>
+</html>
